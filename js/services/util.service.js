@@ -3,8 +3,6 @@ export const utilService = {
     loadFromStorage,
     makeId,
     randomPastTime,
-    randomPetName,
-    randomPetType
 }
 
 function saveToStorage(key, value) {
