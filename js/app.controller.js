@@ -26,7 +26,7 @@ function getPosition() {
 function onAddMarker() {
     console.log('Adding a marker')
     getPosition()
-    //G : addlistenter
+    //: addlistenter
     mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
 }
 
