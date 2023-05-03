@@ -9,9 +9,9 @@ export const locService = {
     deletLoc,
 }
 
-// onAddMarker
-// onAddLoc addLoc
-// onDeleteLocation
+// onAddMarker-> nothing in loc.service
+// onAddLoc-> addLoc
+// onDeleteLocation-> deleteLoc
 // onGoToLocation
 // onCopyLocation
 // onSearch
@@ -20,8 +20,8 @@ export const locService = {
 
 // I want to add id, weather, createdAt, updatedAt 
 const locs = [
-    { id:AaBb1, name: 'Greatplace', lat: 32.047104, lng: 34.832384, wheather, createdAt, updatedAt }, 
-    { id:AaBb2, name: 'Neveragain', lat: 32.047201, lng: 34.832581, wheather, createdAt, updatedAt }
+    { id: 'AaBb1', name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
+    { id: 'AaBb2', name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
 ]
 console.log('locs:', locs)
 
@@ -41,6 +41,6 @@ function addLoc() {
     console.log('adding...')
 }
 
-function deletLoc(){
+function deletLoc() {
     console.log('deleting...')
 }
