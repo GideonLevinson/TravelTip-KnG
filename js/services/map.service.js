@@ -18,8 +18,14 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 center: { lat, lng },
                 zoom: 15
             })
+
+            gMap.addListener('click', (e) => {
+                console.log('e.latLng: ', e.latLng)
+                // onAddMarker(e.latLng, map)
+            })
             console.log('Map!', gMap)
         })
+
 }
 
 function addMarker(loc) {
