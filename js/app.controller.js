@@ -6,8 +6,9 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
-window.OnSearch = onSearch
+window.onSearch = onSearch
 window.renderLocs = renderLocs
+window.onDelete = onDelete
 
 
 function onInit() {
@@ -62,33 +63,36 @@ function onPanTo({ lat, lng }) {
     mapService.panTo(lat, lng)
 }
 
-function onSearch(ev) {
-    if (ev) ev.preventDefault()
-    const elInputSearch = document.querySelector('input[name=search')
+function onSearch() {
+    const elInputSearch = document.querySelector('input[name=search]')
     const searchValue = elInputSearch.value
     locService.getLoc(searchValue)
-    // .then(locService.getLocs())
-    // .then(res => renderLocs(res))
+        .then(res => locService.getLocs())
+        .then(res => {
+            console.log('res: ', res)
+            renderLocs(res)
+        })
 }
 
 function renderLocs(locations) {
-    const elLocationsList = document.querySelector('.location-container ul')
-    const strHTML = locations.map(location => {
-        const { name, pos: { lat, lng }, id } = location
-        const location = `
-            <li class="location-item">
-               <h3>${name}</h3>
-               <button class="go-btn btn" onclick="onGo(${id})"></button>
-               <button class="delete-btn btn" onclick="onDelete(${id})" ></button>
-            </li>
-        `
-        return location
+    const elLocationsList = document.querySelector('.locations-container ul')
+
+    const strHTML = locations.map(loc => {
+        const { name, id } = loc
+        const locationItem = `
+                    <li class="location-item">
+                       <h3>${name}</h3>
+                       <button class="go-btn btn" onclick="onGo('${id}')">Go</button>
+                       <button class="delete-btn btn" onclick="onDelete('${id}')" >Delete</button>
+                    </li>
+                `
+        return locationItem
     })
     elLocationsList.innerHTML = strHTML.join('')
 }
 
 function onDelete(locId) {
-    deleteLoc(locId)
+    locService.deleteLoc(locId)
     locService.getLocs()
         .then(res => renderLocs(res))
 }

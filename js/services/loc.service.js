@@ -7,6 +7,7 @@ export const locService = {
     getLocs,
     addLoc,
     deleteLoc,
+    getLoc
 }
 
 // onAddMarker-> nothing in loc.service
@@ -56,10 +57,13 @@ function addLoc(loc) {
     const newLocId = utilService.makeId()
     loc['id'] = newLocId
     locs.push(loc)
+    console.log('locs: ', locs)
 }
 
-function deleteLoc() {
-    console.log('deleting...')
+function deleteLoc(locId) {
+    const locIdx = getLocIdxById(locId)
+    getLocs()
+        .then(res => res.splice(locIdx, 1))
 }
 
 function getLocIdxById(locId) {
